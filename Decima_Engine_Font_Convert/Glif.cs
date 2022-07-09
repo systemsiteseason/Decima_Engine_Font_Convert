@@ -64,43 +64,49 @@ namespace Decima_Engine_Font_Convert
                         foreach(var pivot in glyph.Pivots)
                         {
                             writer.WriteStartElement("contour");
-                            int i = 0;
-                            bool isctpoint = false;
-                            int j = 0;
-                            //Debug.WriteLine(BitConverter.ToString(pivot.signal.ToArray()));
-                            foreach (var point in pivot.Points)
+                            Debug.WriteLine(BitConverter.ToString(pivot.signal.ToArray()));
+                            for(int i = 0; i < pivot.signal.Count; i++)
                             {
-                                writer.WriteStartElement("point");
-                                writer.WriteAttributeString("x", $"{point.X}");
-                                writer.WriteAttributeString("y", $"{point.Y}");
-                                //if (pivot.signal[i] >= 0x32)
+                                var counter = pivot.signal[i] & 0x40;
+                                if(counter != 0)
                                 {
+                                    for(int j = 0; j < pivot.signal[i] - 0x40; j++)
+                                    {
+                                        var point = pivot.Points[0];
+                                        writer.WriteStartElement("point");
+                                        writer.WriteAttributeString("x", $"{point.X}");
+                                        writer.WriteAttributeString("y", $"{point.Y}");
+                                        if(j == 0)
+                                            writer.WriteAttributeString("type", "line");
+                                        writer.WriteEndElement();
+                                        pivot.Points.RemoveAt(0);
+                                    }
 
                                 }
-                                /*else if(pivot.signal[i] == 0x43)
+                                else
                                 {
-
+                                    for (int j = 0; j < pivot.signal[i]; j++)
+                                    {
+                                        var point = pivot.Points[0];
+                                        writer.WriteStartElement("point");
+                                        writer.WriteAttributeString("x", $"{point.X}");
+                                        writer.WriteAttributeString("y", $"{point.Y}");
+                                        writer.WriteAttributeString("type", "line");
+                                        writer.WriteEndElement();
+                                        pivot.Points.RemoveAt(0);
+                                    }
                                 }
-                                else if (pivot.signal[i] == 0x44)
+                                if (i == pivot.signal.Count - 1)
                                 {
-
-                                }
-                                else if (pivot.signal[i] == 0x45)
-                                {
-
-                                }*/
-                               // else
-                                {
-                                  /*  if (j == 0)
-                                        j = pivot.signal[i];*/
+                                    var point = pivot.Points[0];
+                                    writer.WriteStartElement("point");
+                                    writer.WriteAttributeString("x", $"{point.X}");
+                                    writer.WriteAttributeString("y", $"{point.Y}");
                                     writer.WriteAttributeString("type", "line");
-                                    /*j--;
-                                    if (j == 0 && pivot.signal.Count > 1)
-                                        i++;*/
+                                    writer.WriteEndElement();
+                                    pivot.Points.RemoveAt(0);
                                 }
-                                writer.WriteEndElement();
                             }
-
                             writer.WriteEndElement();
                         }
 

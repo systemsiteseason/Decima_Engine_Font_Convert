@@ -77,10 +77,6 @@ namespace Decima_Engine_Font_Convert
                         Creater_UFO_Folder(font, dirpath);
                     }
                 }
-                else
-                {
-
-                }
             }
         }
 
