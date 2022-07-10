@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Decima_Engine_Font_Convert.FontInfo
 {
@@ -10,10 +11,10 @@ namespace Decima_Engine_Font_Convert.FontInfo
     {
         public float AdvWidth { get; set; }
         public string Character { get; set; }
-        public float Left { get; set; }
-        public float Bottom { get; set; }
-        public float Top { get; set; }
-        public float Right { get; set; }
+        public float minX { get; set; }
+        public float minY { get; set; }
+        public float maxX { get; set; }
+        public float maxY { get; set; }
         public List<Pivot> Pivots { get; set; }
     }
 

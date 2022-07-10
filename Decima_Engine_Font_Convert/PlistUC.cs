@@ -233,7 +233,7 @@ namespace Decima_Engine_Font_Convert
                 writer.WriteEndElement();
 
                 writer.WriteElementString("key", "openTypeOS2TypoAscender");
-                writer.WriteElementString("integer", $"{font.openTypeHheaAscender}");
+                writer.WriteElementString("integer", $"{font.openTypeOS2TypoAscender}");
                 writer.WriteElementString("key", "openTypeOS2TypoDescender");
                 writer.WriteElementString("integer", $"{font.descender * -1}");
                 writer.WriteElementString("key", "openTypeOS2TypoLineGap");

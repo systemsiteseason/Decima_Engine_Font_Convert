@@ -32,7 +32,7 @@ namespace Decima_Engine_Font_Convert
                     writer.WriteAttributeString("format", "2");
 
                         writer.WriteStartElement("advance");
-                        writer.WriteAttributeString("width", "250");
+                        writer.WriteAttributeString("width", $"{glyph.AdvWidth}");
                         writer.WriteEndElement();
 
                     writer.WriteEndElement();
